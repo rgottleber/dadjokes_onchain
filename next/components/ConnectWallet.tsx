@@ -1,17 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ConnectWalletClient, ConnectPublicClient } from "@/lib/client";
 import { formatEther, getContract, parseEther } from "viem";
 import Image from "next/image";
 import dadJokesABI from "@/lib/dadJokesABI.json";
-const publicClient = ConnectPublicClient();
-const walletClient = ConnectWalletClient();
-const dadJokesContract = getContract({
-  address: "0x4fF652D3C68F488D6c99ca796581d3c4a83f56ED",
-  abi: dadJokesABI,
-  client: { public: publicClient, wallet: walletClient },
-});
 
 interface WalletButtonProps {
   index: number;
@@ -30,13 +23,43 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
   const [balance, setBalance] = useState<string | null>(null);
   const [setup, setSetup] = useState("");
   const [punchline, setPunchline] = useState("");
+  const [publicClient, setPublicClient] = useState<any>(null);
+  const [walletClient, setWalletClient] = useState<any>(null);
+  const [dadJokesContract, setDadJokesContract] = useState<any>(null);
 
+  useEffect(() => {
+    const initializeClients = async () => {
+      try {
+        const publicClient = await ConnectPublicClient();
+        const walletClient = await ConnectWalletClient();
+
+        setPublicClient(publicClient);
+        setWalletClient(walletClient);
+      } catch (error) {
+        console.error("Error initializing clients:", error);
+      }
+    };
+
+    initializeClients();
+  }, []);
+
+  useEffect(() => {
+    if (publicClient && walletClient) {
+      const dadJokesContract = getContract({
+        address: "0x4fF652D3C68F488D6c99ca796581d3c4a83f56ED",
+        abi: dadJokesABI,
+        client: { public: publicClient, wallet: walletClient },
+      });
+
+      setDadJokesContract(dadJokesContract);
+    }
+  }, [publicClient, walletClient]);
   // const creator = joke.creator;
   // Function to handle the button click event
   async function handleClick() {
     try {
       // Instantiate a Wallet Client and a Public Client
-      const walletClient = await ConnectWalletClient();
+      // const walletClient = await ConnectWalletClient();
       // const publicClient = await ConnectPublicClient();
 
       // Retrieve the wallet address using the Wallet Client
@@ -63,7 +86,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
   async function handleVote(index: number, type: number) {
     const reward = type + 1;
     // Instantiate a Wallet Client and a Public Client
-    const walletClient = await ConnectWalletClient();
+    // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
 
@@ -96,7 +119,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
 
   async function handleWithdraw() {
     // Instantiate a Wallet Client and a Public Client
-    const walletClient = await ConnectWalletClient();
+    // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
     const { request } = await publicClient.simulateContract({
@@ -109,7 +132,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
   }
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSubmit = async () => {
-    const walletClient = await ConnectWalletClient();
+    // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
 

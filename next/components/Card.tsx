@@ -11,6 +11,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ joke }) => {
+  console.log(joke);
   if (!joke) {
     return null; // or you can render a loading state or placeholder
   }

@@ -77,8 +77,8 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_question", "type": "string" },
-      { "internalType": "string", "name": "_answer", "type": "string" }
+      { "internalType": "string", "name": "_setup", "type": "string" },
+      { "internalType": "string", "name": "_punchline", "type": "string" }
     ],
     "name": "addJoke",
     "outputs": [],
@@ -107,8 +107,8 @@
     "outputs": [
       {
         "components": [
-          { "internalType": "string", "name": "question", "type": "string" },
-          { "internalType": "string", "name": "answer", "type": "string" },
+          { "internalType": "string", "name": "setup", "type": "string" },
+          { "internalType": "string", "name": "punchline", "type": "string" },
           { "internalType": "address", "name": "creator", "type": "address" },
           {
             "internalType": "uint256",
