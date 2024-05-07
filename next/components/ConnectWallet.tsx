@@ -5,6 +5,7 @@ import { ConnectWalletClient, ConnectPublicClient } from "@/lib/client";
 import { formatEther, getContract, parseEther } from "viem";
 import Image from "next/image";
 import dadJokesABI from "@/lib/dadJokesABI.json";
+import { sepolia } from "viem/chains";
 
 interface WalletButtonProps {
   index: number;
@@ -64,6 +65,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
 
       // Retrieve the wallet address using the Wallet Client
       const [address] = await walletClient.requestAddresses();
+      await walletClient.switchChain({ id: sepolia.id });
       // const [address] = await walletClient.getAddresses();
 
       // Retrieve the balance of the address using the Public Client
@@ -89,6 +91,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
     // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
+    await walletClient.switchChain({ id: sepolia.id });
 
     let rewardAmount;
 
@@ -122,6 +125,8 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
     // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
+    await walletClient.switchChain({ id: sepolia.id });
+
     const { request } = await publicClient.simulateContract({
       address: dadJokesContract.address,
       abi: dadJokesContract.abi,
@@ -135,6 +140,7 @@ export default function WalletButton({ index, joke }: WalletButtonProps) {
     // const walletClient = await ConnectWalletClient();
     // Retrieve the wallet address using the Wallet Client
     const [address] = await walletClient.requestAddresses();
+    await walletClient.switchChain({ id: sepolia.id });
 
     const { request } = await publicClient.simulateContract({
       address: dadJokesContract.address,
