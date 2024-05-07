@@ -1,15 +1,25 @@
 "use client";
+interface Joke {
+  setup: string;
+  punchline: string;
+  creator: string;
+  reward: number;
+}
 
-const Card = ({ joke }) => {
+interface CardProps {
+  joke: Joke;
+}
+
+const Card: React.FC<CardProps> = ({ joke }) => {
   if (!joke) {
     return null; // or you can render a loading state or placeholder
   }
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
       <h2 className="font-sans text-4xl font-bold mb-4 text-primaryDark">
-        {joke.question}
+        {joke.setup}
       </h2>
-      <p className="font-sans text-2xl text-primaryDark">{joke.answer}</p>
+      <p className="font-sans text-2xl text-primaryDark">{joke.punchline}</p>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 ## Foundry
 
-Deployed at [0x97F38014F2C4A71dA80E4ba10cA8241443270D7C](https://sepolia.etherscan.io/address/0x97F38014F2C4A71dA80E4ba10cA8241443270D7C#code) on sepolia
+Deployed at [0x4fF652D3C68F488D6c99ca796581d3c4a83f56ED](https://sepolia.etherscan.io/address/0x4fF652D3C68F488D6c99ca796581d3c4a83f56ED#code) on sepolia
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 

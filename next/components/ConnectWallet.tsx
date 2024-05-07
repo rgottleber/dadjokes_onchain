@@ -8,7 +8,7 @@ import dadJokesABI from "@/lib/dadJokesABI.json";
 const publicClient = ConnectPublicClient();
 const walletClient = ConnectWalletClient();
 const dadJokesContract = getContract({
-  address: "0x97F38014F2C4A71dA80E4ba10cA8241443270D7C",
+  address: "0x4fF652D3C68F488D6c99ca796581d3c4a83f56ED",
   abi: dadJokesABI,
   client: { public: publicClient, wallet: walletClient },
 });
